@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    ╔══════════════════════════════════════════╗
+    ║      TCP ЧАТ — КЛИЕНТ (MAUI UI)          ║
+    ╚══════════════════════════════════════════╝
+-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChatCLient.MainPage"
+             Title="TCP Чат">
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="16" RowSpacing="10">
+
+        <!-- ── Шапка: подключение ── -->
+        <Grid Grid.Row="0" ColumnDefinitions="*, Auto, Auto" ColumnSpacing="8">
+            <Entry x:Name="ServerEntry"
+                   Grid.Column="0"
+                   Placeholder="IP сервера (например 192.168.1.5)"
+                   Text="127.0.0.1"
+                   Keyboard="Url" />
+            <Entry x:Name="NameEntry"
+                   Grid.Column="1"
+                   Placeholder="Ваш ник"
+                   WidthRequest="100" />
+            <Button x:Name="ConnectBtn"
+                    Grid.Column="2"
+                    Text="Войти"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    Clicked="OnConnectClicked" />
+        </Grid>
+
+        <!-- ── Лента сообщений ── -->
+        <Border Grid.Row="1"
+                Stroke="#E0E0E0"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 8">
+            <ScrollView x:Name="MessagesScroll">
+                <VerticalStackLayout x:Name="MessagesStack"
+                                     Padding="10"
+                                     Spacing="6" />
+            </ScrollView>
+        </Border>
+
+        <!-- ── Поле ввода + кнопка отправки ── -->
+        <Grid Grid.Row="2" ColumnDefinitions="*, Auto" ColumnSpacing="8">
+            <Entry x:Name="MessageEntry"
+                   Grid.Column="0"
+                   Placeholder="Введите сообщение..."
+                   IsEnabled="False"
+                   ReturnCommand="{Binding SendCommand}"
+                   ReturnCommandParameter="{Binding Text, Source={x:Reference MessageEntry}}" />
+            <Button x:Name="SendBtn"
+                    Grid.Column="1"
+                    Text="▶"
+                    BackgroundColor="#2196F3"
+                    TextColor="White"
+                    IsEnabled="False"
+                    Clicked="OnSendClicked" />
+        </Grid>
+
+    </Grid>
+</ContentPage>
